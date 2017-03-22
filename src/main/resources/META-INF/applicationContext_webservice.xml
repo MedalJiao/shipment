@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			    http://www.springframework.org/schema/aop 
+				http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+			    http://www.springframework.org/schema/context
+			    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			    http://cxf.apache.org/jaxws 
+				http://cxf.apache.org/schemas/jaxws.xsd
+			    http://cxf.apache.org/jaxrs
+			    http://cxf.apache.org/schemas/jaxrs.xsd 
+			    http://code.alibabatech.com/schema/dubbo          
+			 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<bean id="shipmentWS" class="com.otms.exercise.webservice.ShipmentWS" />
+	<jaxrs:server id="wsServer" address="/rest">
+		<jaxrs:serviceBeans>
+			<ref bean="shipmentWS" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
+		</jaxrs:extensionMappings>
+		<jaxrs:languageMappings>
+			<entry key="en" value="en-gb" />
+		</jaxrs:languageMappings>
+	</jaxrs:server>
+</beans>
